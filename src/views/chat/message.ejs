@@ -1,0 +1,90 @@
+<%- include('../partials/head.ejs', {title}) -%>
+
+  <div class="container">
+    <div class="d-flex justify-content-between">
+      <a href="/users/<%= user._id %>" class="btn btn-primary">Go Back</a>
+      <a href="/" class="btn btn-danger">Logout</a>
+    </div>
+    <h2 class="mt-3 text-center">Chatting with <%= receiver.username %>...</h2>
+    <div class="col-md-8 m-auto">
+      <div id="message-container">
+        <% messages.forEach((message)=> { %>
+          <% if(message.senderId.toString()===user.id){ %>
+            <div class="bubble sender-bubble">
+              <i class="m-0 p-1"><b>You</b> - <%= message.time %>
+              </i>
+              <p class="m-0">
+                <%= message.message%>
+              </p>
+            </div>
+            <% }else{%>
+              <div class="bubble receiver-bubble">
+                <i class="m-0 p-1">
+                  <b>
+                    <%= receiver.username %>
+                  </b> - <%= message.time %>
+                </i>
+                <p class="m-0">
+                  <%= message.message%>
+                </p>
+              </div>
+              <% }%>
+                <% }) %>
+      </div>
+      <input class="form-control" id="message" type="text" placeholder="Enter your message here...">
+    </div>
+  </div>
+
+  <%- include('../partials/foot.ejs') -%>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const message = document.getElementById('message');
+      const messageContainer = document.getElementById('message-container');
+      messageContainer.scrollTo(0, messageContainer.scrollHeight); // init
+      const socket = io();
+      socket.emit('join', { room: '<%= room %>' })
+      socket.on('message', (data) => {
+        if (data.message.senderId === '<%= user.id %>') {
+          messageContainer.insertAdjacentHTML('beforeend', `
+            <div class="bubble sender-bubble">
+              <i class="m-0 p-1"><b>You</b> - ${new Date(data.message.time)}</i>
+              <p class="m-0">${data.message.message}</p>
+            </div>
+            `)
+        } else {
+          messageContainer.insertAdjacentHTML('beforeend', `
+            <div class="bubble receiver-bubble">
+              <i class="m-0 p-1">
+                <b><%= receiver.username %></b> - ${new Date(data.message.time)}
+              </i>
+              <p class="m-0">${data.message.message}</p>
+            </div>
+          `)
+        }
+        messageContainer.scrollTo(0, messageContainer.scrollHeight);
+      });
+      message.addEventListener('keyup', (e) => {
+        // enter pressed
+        if (e.keyCode === 13) {
+          axios(`/chats`, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            data: {
+              message: e.target.value,
+              senderId: '<%= user.id %>',
+              receiverId: '<%= receiver.id %>',
+            },
+          }).then((res) => {
+            // do something...
+          }).catch((err) => {
+            console.log(err)
+          }).finally(() => {
+            e.target.value = ''
+          });
+        }
+      })
+
+    </script>

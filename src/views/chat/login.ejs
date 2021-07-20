@@ -1,0 +1,16 @@
+<%- include('../partials/head.ejs', {title}) -%>
+
+  <div class="container text-center">
+    <h2 class="mt-5">Hi, please choose one of the user below to login:</h2>
+    <div class="col-md-4 m-auto">
+      <div class="d-flex flex-column">
+        <% users.forEach((user)=> { %>
+          <a href="/users/<%= user._id %>" class="btn btn-primary p-2 my-2">
+            <%= user.username %>
+          </a>
+          <% }); %>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../partials/foot.ejs') -%>

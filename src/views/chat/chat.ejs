@@ -1,0 +1,19 @@
+<%- include('../partials/head.ejs', {title}) -%>
+
+  <div class="container text-center">
+    <div class="d-flex justify-content-end">
+      <a href="/" class="btn btn-danger">Logout</a>
+    </div>
+    <h2 class="mt-5">Hi <%= user.username %>, who you want to chat with?</h2>
+    <div class="col-md-4 m-auto">
+      <div class="d-flex flex-column">
+        <% users.forEach((receiver)=> { %>
+          <a href="/users/<%= user._id %>/chat/<%= receiver._id %>" class="btn btn-primary my-2">
+            <%= receiver.username %>
+          </a>
+          <% }); %>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../partials/foot.ejs') -%>
