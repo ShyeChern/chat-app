@@ -4,6 +4,10 @@ This is a very simple chat app using node.js with socket.io. It is hosted under 
 
 [Changelog](CHANGELOG.md)
 
+## Demo
+![Login](gif/login.gif)
+![Chat](gif/chat.gif)
+
 ## Installation
 
 1. Clone this repo
