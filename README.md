@@ -5,8 +5,12 @@ This is a very simple chat app using node.js with socket.io. It is hosted under 
 [Changelog](CHANGELOG.md)
 
 ## Demo
-![Login](gif/login.gif)
-![Chat](gif/chat.gif)
+
+### Login
+<img src="https://github.com/ShyeChern/chat-app/raw/master/gif/login.gif" alt="Login" width="400" height="150"> 
+
+### Chat
+<img src="https://github.com/ShyeChern/chat-app/raw/master/gif/chat.gif" alt="Chat" width="600" height="300">
 
 ## Installation
 
