@@ -1,6 +1,6 @@
 # Chat App
 
-This is a very simple chat app using node.js with socket.io. It is hosted under https://chat.shyechern.com/.
+This is a very simple chat app using node.js with socket.io. It is host under https://chat.shyechern.com/.
 
 [Changelog](CHANGELOG.md)
 
