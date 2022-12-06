@@ -1,6 +1,6 @@
-# Chat App
+# Chat App (Abandoned)
 
-This is a very simple chat app using node.js with socket.io. It is host under https://chat.shyechern.com/.
+This is a very simple chat app using node.js with socket.io. 
 
 [Changelog](CHANGELOG.md)
 
